@@ -122,8 +122,8 @@ Executable files will appear in the `dist` folder.
 
 # 👨‍💻 Contributors
 
+- **Daniel Aquaries Pratama**
 - **Arvin Farrel Pramuditya**
-- Daniel Aquaries Pratama
   https://github.com/danielaquaries20
 
 ---
@@ -131,6 +131,17 @@ Executable files will appear in the `dist` folder.
 # 📚 Educational Purpose
 
 CipherVision is an educational project created to demonstrate how classical cryptographic systems work and how statistical methods like **frequency analysis** can be used to break simple substitution ciphers.
+
+---
+
+# 🏛 Intellectual Property
+
+This project has been registered as **Intellectual Property (HKI)** in Indonesia.
+
+Authors:
+
+- Daniel Aquaries Pratama
+- Arvin Farrel Pramuditya
 
 ---
 
