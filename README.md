@@ -123,8 +123,8 @@ Executable files will appear in the `dist` folder.
 # 👨‍💻 Contributors
 
 - **Daniel Aquaries Pratama**
-- **Arvin Farrel Pramuditya**
   https://github.com/danielaquaries20
+- **Arvin Farrel Pramuditya**
 
 ---
 
