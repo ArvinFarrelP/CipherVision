@@ -1,17 +1,14 @@
-Berikut README versi **lebih jelas, minimalis, dan sudah include bagian executable (.exe)**. Siap copy langsung:
-
-````markdown
 # CipherVision
 
-CipherVision is a simple cryptographic analysis and visualization tool for learning how classical substitution ciphers work and how they can be broken using frequency analysis.
+CipherVision is a lightweight tool for analyzing and visualizing classical substitution ciphers using frequency analysis.
 
 ## Features
 
-- Text encryption using substitution cipher
+- Substitution cipher encryption
 - Letter frequency analysis
-- Visualization using matplotlib
-- Simple GUI with ttkbootstrap
-- Standalone executable support (.exe)
+- Visualization with matplotlib
+- Simple GUI (ttkbootstrap)
+- Standalone executable support
 
 ## Requirements
 
@@ -25,11 +22,10 @@ CipherVision is a simple cryptographic analysis and visualization tool for learn
 ```bash
 pip install matplotlib numpy ttkbootstrap
 ```
-````
 
 ## Usage
 
-Run encryption tool:
+Encrypt text:
 
 ```bash
 python encrypt_text.py
@@ -41,7 +37,7 @@ Run frequency analysis:
 python frequency_analysis.py
 ```
 
-## Build Executable (Windows)
+## Build (Windows)
 
 ```bash
 pip install pyinstaller
@@ -49,7 +45,7 @@ python -m PyInstaller --onefile --windowed frequency_analysis.py
 python -m PyInstaller --onefile --windowed encrypt_text.py
 ```
 
-Output will be available in:
+Output:
 
 ```bash
 dist/
@@ -61,7 +57,7 @@ Run:
 dist/frequency_analysis.exe
 ```
 
-## Sample Text
+## Sample
 
 ```
 THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.
