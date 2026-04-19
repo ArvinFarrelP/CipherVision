@@ -1,6 +1,12 @@
 # CipherVision
 
-CipherVision is a lightweight tool for analyzing and visualizing classical substitution ciphers using frequency analysis.
+CipherVision is a lightweight tool for analyzing classical substitution ciphers through frequency analysis and visualization.
+
+Designed for educational purposes and experimentation in basic cryptanalysis.
+
+## Download
+
+https://github.com/ArvinFarrelp/CipherVision/releases
 
 ## Features
 
@@ -21,7 +27,7 @@ CipherVision is a lightweight tool for analyzing and visualizing classical subst
 
 ```bash
 pip install matplotlib numpy ttkbootstrap
-```
+````
 
 ## Usage
 
@@ -67,5 +73,5 @@ FREQUENCY ANALYSIS HELPS TO BREAK SIMPLE SUBSTITUTION CIPHERS.
 
 ## Contributors
 
-- Daniel Aquaries Pratama
-- Arvin Farrel Pramuditya
+* Daniel Aquaries Pratama
+* Arvin Farrel Pramuditya
