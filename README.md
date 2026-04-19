@@ -1,38 +1,31 @@
+Berikut README versi **lebih jelas, minimalis, dan sudah include bagian executable (.exe)**. Siap copy langsung:
+
+````markdown
 # CipherVision
 
-CipherVision is a cryptographic analysis and visualization tool designed to demonstrate how classical substitution ciphers work and how they can be broken using frequency analysis.
-
-## Description
-
-This project helps users understand the fundamentals of cryptography and cryptanalysis through simple, interactive experimentation using a graphical interface.
+CipherVision is a simple cryptographic analysis and visualization tool for learning how classical substitution ciphers work and how they can be broken using frequency analysis.
 
 ## Features
 
-- Encrypt text using classical substitution ciphers
-- Automatically calculate letter frequency distribution
-- Visualize frequency patterns using matplotlib
-- Simple GUI built with ttkbootstrap
+- Text encryption using substitution cipher
+- Letter frequency analysis
+- Visualization using matplotlib
+- Simple GUI with ttkbootstrap
+- Standalone executable support (.exe)
 
-## Concepts
+## Requirements
 
-- Classical substitution ciphers
-- Frequency analysis
-- Cryptanalysis techniques
-- Statistical patterns in language
+- Python 3.10+
+- matplotlib
+- numpy
+- ttkbootstrap
 
 ## Installation
-
-Activate virtual environment:
-
-```bash
-.venv\Scripts\activate
-```
-
-Install dependencies:
 
 ```bash
 pip install matplotlib numpy ttkbootstrap
 ```
+````
 
 ## Usage
 
@@ -42,10 +35,30 @@ Run encryption tool:
 python encrypt_text.py
 ```
 
-Run frequency analysis tool:
+Run frequency analysis:
 
 ```bash
 python frequency_analysis.py
+```
+
+## Build Executable (Windows)
+
+```bash
+pip install pyinstaller
+python -m PyInstaller --onefile --windowed frequency_analysis.py
+python -m PyInstaller --onefile --windowed encrypt_text.py
+```
+
+Output will be available in:
+
+```bash
+dist/
+```
+
+Run:
+
+```bash
+dist/frequency_analysis.exe
 ```
 
 ## Sample Text
@@ -54,22 +67,9 @@ python frequency_analysis.py
 THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.
 CRYPTOGRAPHY IS THE ART OF SECRET COMMUNICATION.
 FREQUENCY ANALYSIS HELPS TO BREAK SIMPLE SUBSTITUTION CIPHERS.
-LEARNING BY DOING MAKES THE PROCESS MORE FUN AND MEMORABLE.
-```
-
-## Build Executable
-
-```bash
-pip install pyinstaller
-pyinstaller --onefile --windowed frequency_analysis.py
-pyinstaller --onefile --windowed encrypt_text.py
 ```
 
 ## Contributors
 
 - Daniel Aquaries Pratama
 - Arvin Farrel Pramuditya
-
-## Purpose
-
-This project is intended for educational purposes to demonstrate how classical cryptographic systems work and how statistical methods can be used to break them.

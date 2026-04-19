@@ -1,9 +1,14 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog, filedialog
-import string, collections, random, json
+import string
+import collections
+import random
+import json
 import matplotlib.pyplot as plt
 from tkinter import simpledialog
-import subprocess, sys, os
+import subprocess
+import sys
+import os
 
 
 # ===================================================== #
@@ -68,7 +73,8 @@ COMMON_WORDS_EN = [
     "THIS",
 ]
 
-COMMON_BIGRAMS_ID = ["AN", "NG", "DA", "KA", "YA", "LA", "TU", "DI", "KE", "SA", "TA"]
+COMMON_BIGRAMS_ID = ["AN", "NG", "DA", "KA",
+                     "YA", "LA", "TU", "DI", "KE", "SA", "TA"]
 COMMON_TRIGRAMS_ID = ["DAN", "YANG", "ING", "KAN", "NGA", "ANG", "BER", "TER"]
 COMMON_WORDS_ID = [
     "DAN",
@@ -108,7 +114,8 @@ def proportions(counter, total):
 
 
 def suggest_mapping(counter):
-    cipher_order = [l for l, _ in sorted(counter.items(), key=lambda x: (-x[1], x[0]))]
+    cipher_order = [l for l, _ in sorted(
+        counter.items(), key=lambda x: (-x[1], x[0]))]
     suggestion = {}
     for i, c in enumerate(cipher_order):
         if i < len(ENGLISH_FREQ_ORDER):
@@ -133,7 +140,7 @@ def apply_mapping(text, mapping, unknown_char="·"):
 
 def ngram_analysis(text, n=2, top_k=10):
     norm = normalize_text(text)
-    ngrams = [norm[i : i + n] for i in range(len(norm) - n + 1)]
+    ngrams = [norm[i: i + n] for i in range(len(norm) - n + 1)]
     counter = collections.Counter(ngrams)
     return counter.most_common(top_k)
 
@@ -212,7 +219,7 @@ def find_trigram_recommendations(ciphertext, preview, target_trigrams):
     n = 3
     for tg in target_trigrams:
         for i in range(len(upper_preview) - n + 1):
-            segment = upper_preview[i : i + n]
+            segment = upper_preview[i: i + n]
             # hitung huruf yang cocok
             matches = sum(1 for sp, tp in zip(segment, tg) if sp == tp)
             dots = segment.count("·")
@@ -352,7 +359,7 @@ class SubstitutionGUI:
             bg="#9c27b0",
             fg="white",
             command=self.open_encryption_app
-        ).pack(side="left", padx=3, pady=10)        
+        ).pack(side="left", padx=3, pady=10)
 
         # Mapping manual
         map_frame = tk.LabelFrame(
@@ -365,14 +372,16 @@ class SubstitutionGUI:
         map_frame.pack(fill="x", pady=5)
         self.cipher_var = tk.StringVar()
         self.plain_var = tk.StringVar()
-        ttk.Label(map_frame, text="Cipher").grid(row=0, column=0, padx=2, pady=(10, 2))
+        ttk.Label(map_frame, text="Cipher").grid(
+            row=0, column=0, padx=2, pady=(10, 2))
         ttk.Combobox(
             map_frame,
             textvariable=self.cipher_var,
             values=list(string.ascii_uppercase),
             width=5,
         ).grid(row=0, column=1, padx=2, pady=(10, 2))
-        ttk.Label(map_frame, text="→ Plain").grid(row=1, column=0, padx=2, pady=(2, 10))
+        ttk.Label(map_frame, text="→ Plain").grid(
+            row=1, column=0, padx=2, pady=(2, 10))
         ttk.Combobox(
             map_frame,
             textvariable=self.plain_var,
@@ -515,7 +524,8 @@ class SubstitutionGUI:
     def analyze(self):
         self.ciphertext = self.input_text.get("1.0", "end").strip()
         if not self.ciphertext:
-            messagebox.showwarning("Peringatan", "Masukkan ciphertext terlebih dahulu.")
+            messagebox.showwarning(
+                "Peringatan", "Masukkan ciphertext terlebih dahulu.")
             return
         counter, total = frequency_analysis(self.ciphertext)
         self.hint_mapping = suggest_mapping(counter)
@@ -548,7 +558,8 @@ class SubstitutionGUI:
 
         # Label persentase
         for i, v in enumerate(values):
-            plt.text(i, v + 0.5, f"{v/total*100:.1f}%", ha="center", fontsize=8)
+            plt.text(i, v + 0.5, f"{v/total*100:.1f}%",
+                     ha="center", fontsize=8)
 
         plt.title("Histogram Frekuensi Huruf (Ciphertext, diurutkan)")
         plt.xlabel("Huruf")
@@ -585,7 +596,8 @@ class SubstitutionGUI:
                 "Q": 0.1,
                 "Z": 0.07,
             }
-            ref_values = [english_freq.get(l, 0) / 100 * total for l in letters]
+            ref_values = [english_freq.get(
+                l, 0) / 100 * total for l in letters]
             plt.plot(
                 letters,
                 ref_values,
@@ -625,7 +637,8 @@ class SubstitutionGUI:
                 "X": 0.1,
                 "Q": 0.1,
             }
-            ref_values = [indonesian_freq.get(l, 0) / 100 * total for l in letters]
+            ref_values = [indonesian_freq.get(
+                l, 0) / 100 * total for l in letters]
             plt.plot(
                 letters,
                 ref_values,
@@ -690,7 +703,8 @@ class SubstitutionGUI:
         dialog.title("Pilih Shift Caesar")
         dialog.grab_set()  # fokus ke dialog
 
-        tk.Label(dialog, text="Geser slider untuk memilih shift (-25 sampai 25)").pack(pady=10)
+        tk.Label(
+            dialog, text="Geser slider untuk memilih shift (-25 sampai 25)").pack(pady=10)
 
         shift_var = tk.IntVar(value=0)
         slider = tk.Scale(
@@ -712,7 +726,7 @@ class SubstitutionGUI:
         tk.Button(dialog, text="OK", command=confirm).pack(pady=10)
 
         dialog.wait_window()  # tunggu sampai dialog ditutup
-        return result["shift"]    
+        return result["shift"]
 
     # ====== Mmebuka Aplikasi kedua lewat CMD ======
     # def open_encryption_app(self):
@@ -725,11 +739,13 @@ class SubstitutionGUI:
     # ====== Mmebuka Aplikasi kedua lewat .exe ======
     def open_encryption_app(self):
         try:
-            exe_path = os.path.join(os.path.dirname(sys.executable), "encrypth_text.exe")
+            exe_path = os.path.join(os.path.dirname(
+                sys.executable), "encrypt_text.exe")
             subprocess.Popen([exe_path])
             self.set_status("Aplikasi enkripsi dibuka.")
         except Exception as e:
-            messagebox.showerror("Error", f"Gagal membuka aplikasi enkripsi: {e}")
+            messagebox.showerror(
+                "Error", f"Gagal membuka aplikasi enkripsi: {e}")
 
     # ====== Mapping manual ======
     def update_mapping(self):
@@ -805,14 +821,17 @@ class SubstitutionGUI:
                 "1.0",
                 f"[Preview Caesar berdasarkan {c}->{p}, shift {shift}]\n\n{preview}",
             )
-            self.set_status(f"Preview Caesar dibuat dengan shift {shift} dari {c}->{p}")
+            self.set_status(
+                f"Preview Caesar dibuat dengan shift {shift} dari {c}->{p}")
         else:
-            messagebox.showerror("Error", "Isi Cipher dan Plain dengan huruf A–Z.")
+            messagebox.showerror(
+                "Error", "Isi Cipher dan Plain dengan huruf A–Z.")
 
     def run_caesar_attack(self):
         self.ciphertext = self.input_text.get("1.0", "end").strip()
         if not self.ciphertext:
-            messagebox.showwarning("Peringatan", "Masukkan ciphertext terlebih dahulu.")
+            messagebox.showwarning(
+                "Peringatan", "Masukkan ciphertext terlebih dahulu.")
             return
 
         # Tanya user apakah mau input shift manual
@@ -834,8 +853,9 @@ class SubstitutionGUI:
             self.attack_text.insert(
                 "1.0", f"[Caesar shift {shift} (manual via slider)]\n\n{self.attack_preview}"
             )
-            self.set_status(f"Preview Caesar dengan shift {shift} ditampilkan.")
-            
+            self.set_status(
+                f"Preview Caesar dengan shift {shift} ditampilkan.")
+
         else:  # === Mode otomatis (brute force terbaik) ===
             best_shift, best_text, best_score, _ = caesar_attack(
                 self.ciphertext, lang=self.lang.get()
@@ -853,8 +873,9 @@ class SubstitutionGUI:
 
     def preview_caesar_shift(self):
         self.ciphertext = self.input_text.get("1.0", "end").strip()
-        if not self.ciphertext: 
-            messagebox.showwarning("Peringatan", "Masukkan ciphertext terlebih dahulu.")
+        if not self.ciphertext:
+            messagebox.showwarning(
+                "Peringatan", "Masukkan ciphertext terlebih dahulu.")
             return
 
         shift = self.shift_var.get()
@@ -872,7 +893,8 @@ class SubstitutionGUI:
     def run_random_attack(self):
         self.ciphertext = self.input_text.get("1.0", "end").strip()
         if not self.ciphertext:
-            messagebox.showwarning("Peringatan", "Masukkan ciphertext terlebih dahulu.")
+            messagebox.showwarning(
+                "Peringatan", "Masukkan ciphertext terlebih dahulu.")
             return
         try:
             iterations = simpledialog.askinteger(
@@ -936,7 +958,8 @@ class SubstitutionGUI:
     def run_auto_tune(self):
         self.ciphertext = self.input_text.get("1.0", "end").strip()
         if not self.ciphertext:
-            messagebox.showwarning("Peringatan", "Masukkan ciphertext terlebih dahulu.")
+            messagebox.showwarning(
+                "Peringatan", "Masukkan ciphertext terlebih dahulu.")
             return
         if not self.hint_mapping:
             messagebox.showinfo(
@@ -1001,12 +1024,14 @@ class SubstitutionGUI:
             "1.0",
             f"[Auto-Tune, skor {best_score}, iterasi {iterations}]\n\n{self.attack_preview}",
         )
-        self.set_status("Auto-Tune selesai. Mapping siap pakai dan bisa di-merge.")
+        self.set_status(
+            "Auto-Tune selesai. Mapping siap pakai dan bisa di-merge.")
 
     # ====== Analisis hasil attack ======
     def analyze_attack_preview(self):
         if not self.attack_preview:
-            messagebox.showinfo("Info", "Belum ada hasil attack untuk dianalisis.")
+            messagebox.showinfo(
+                "Info", "Belum ada hasil attack untuk dianalisis.")
             return
         c_counter, c_total = frequency_analysis(self.ciphertext)
         c_prop = proportions(c_counter, c_total)
@@ -1047,7 +1072,8 @@ class SubstitutionGUI:
 
         # Label persentase
         for i, v in enumerate(values):
-            plt.text(i, v + 0.5, f"{v/total*100:.1f}%", ha="center", fontsize=8)
+            plt.text(i, v + 0.5, f"{v/total*100:.1f}%",
+                     ha="center", fontsize=8)
 
         plt.title("Histogram Frekuensi Huruf (Plaintext hasil attack, diurutkan)")
         plt.xlabel("Huruf")
@@ -1084,7 +1110,8 @@ class SubstitutionGUI:
                 "Q": 0.1,
                 "Z": 0.07,
             }
-            ref_values = [english_freq.get(l, 0) / 100 * total for l in letters]
+            ref_values = [english_freq.get(
+                l, 0) / 100 * total for l in letters]
             plt.plot(
                 letters,
                 ref_values,
@@ -1124,7 +1151,8 @@ class SubstitutionGUI:
                 "X": 0.1,
                 "Q": 0.1,
             }
-            ref_values = [indonesian_freq.get(l, 0) / 100 * total for l in letters]
+            ref_values = [indonesian_freq.get(
+                l, 0) / 100 * total for l in letters]
             plt.plot(
                 letters,
                 ref_values,
@@ -1139,7 +1167,8 @@ class SubstitutionGUI:
 
     def apply_attack_to_preview(self):
         if not self.attack_preview:
-            messagebox.showinfo("Info", "Belum ada hasil attack untuk diterapkan.")
+            messagebox.showinfo(
+                "Info", "Belum ada hasil attack untuk diterapkan.")
             return
         self.output_text.delete("1.0", "end")
         self.output_text.insert("1.0", self.attack_preview)
